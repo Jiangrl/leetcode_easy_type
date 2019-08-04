@@ -1,0 +1,31 @@
+//二叉树的层次遍历II
+//给定一个二叉树, 反而其节点值"自底向上"的层次遍历
+	
+	//直接层次遍历的之后逆置
+	vector<vector<int>> levelOrderBottom(TreeNode* root){
+       vector<vector<int>> res;
+        
+        queue<TreeNode*> q;
+        if(!root) return res;
+        TreeNode* p = root;
+        
+        q.push(p);
+       
+        while(!q.empty()){
+            vector<int> v;
+            int curr = 0, size = q.size(); 
+            
+            while(curr < size){
+                curr ++;
+                p = q.front();
+                q.pop();
+                v.push_back(p->val);
+                if(p->left != NULL) q.push(p->left);
+                if(p->right != NULL) q.push(p->right); 
+            }
+            res.push_back(v);
+        }
+        
+        reverse(res.begin(), res.end());
+        return res; 
+    }

@@ -1,0 +1,25 @@
+//反转链表
+//链表的逆置  我们可以遍历每个节点 将其取下来使用头插法插入到新的链表中去!
+	
+	//翻转链表利用头插法，顺序相反
+    ListNode* reverseList(ListNode* head) {
+        
+        //特殊情况处理
+        if(head == NULL) return NULL;
+        ListNode* newList = NULL;// 先创建一个空链表
+        
+        ListNode* p = head;//从第一个数字节点开始操作
+        
+        while(p != NULL){
+            
+            ListNode* tmp = p->next;//临时节点 可以先存后面的链表 防止出现断链
+            
+            //一定是先next连接起来, next相当于是用来连接的链
+            p->next = newList;//将当前移动节点指向新建的链表的节点
+             
+            newList = p; //相当于更新头节点
+            p = tmp;//移动节点后移
+        }
+        
+        return newList;
+    }

@@ -1,0 +1,29 @@
+//同构字符串
+//给定两个字符串 s & t, 如果s中的字符可以进行替换 从而得到字符t, 则称s 和 t是同构的!
+//所谓替换 意思是说一个字符只能使用同一个字符进行替换!, 并且保证字符的顺序.
+//两个字符无法映射到同一个字符上 但是字符可以映射到本身(即自己替换自己)
+
+	//1.直接使用string 中的find()方法
+    //2.当然了也可以使用map映射关系
+    bool isIsomorphic(string s, string t) {
+        
+        //从是s -> t && t -> s
+        return buildReflection(s, t) && buildReflection(t, s);
+    }
+    
+    bool buildReflection(string s, string t){
+        if(s.size() != t.size()) return false;
+        
+        map<char, char> mp;//找映射关系
+        //我们知道同一个字符是需要找相同映射的
+        for(int i = 0; i < s.size(); i ++){
+            
+            if(mp.count(s[i])){//前提是先包含这个字符
+                if(mp[s[i]] != t[i]){//如果包含了这个字符，就继续判断
+                    return false;
+                }
+            }
+            else mp[s[i]] = t[i];//添加映射关系!
+        }
+        return true;
+    }

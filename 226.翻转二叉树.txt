@@ -1,0 +1,19 @@
+//翻转二叉树
+
+ TreeNode* invertTree(TreeNode* root) {
+         
+        if(root == NULL) return NULL;
+        
+        //各种情况分析出来
+        if(root->left == NULL && root->right == NULL) return root;
+        
+        //不停的转换(swap)
+        TreeNode* tmp = root->left;
+        root->left = root->right;
+        root->right = tmp;
+        
+        invertTree(root->left);
+        invertTree(root->right);
+        
+        return root;
+    }

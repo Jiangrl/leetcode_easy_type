@@ -1,0 +1,18 @@
+//找不同
+//给定两个字符串s & t, 其中均只包括小写字母. 其中t是s的随机重排, 然后在随机位置插入一个字母.
+//即t 比 s多一个字母(字符)
+
+	char findTheDifference(string s, string t) {
+        
+        //添加了一个char 字符 --- only one;
+        sort(s.begin(), s.end()); //可以直接排序
+        sort(t.begin(), t.end());
+        
+        for(int i = 0; i < t.size(); i ++){
+            if(s[i] != t[i]) return t[i];
+        }
+        
+        return NULL;
+        
+        //或者使用ASCII码值的差值.
+    }

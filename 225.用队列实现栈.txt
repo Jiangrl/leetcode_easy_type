@@ -1,0 +1,38 @@
+//用队列实现栈
+//理清楚两种数据结构的特点即可!
+// queue front(pop) tail(push)
+// stack top(push & pop)
+
+private: 
+    deque<int> dq;//调用了一个双端队列
+public:
+    /** Initialize your data structure here. */
+    MyStack() {
+        //提示：使用一个list / deque来模拟这个队列
+    }
+    
+    /** Push element x onto stack. */
+    void push(int x) {
+        //从队尾进 从队头出
+        dq.push_back(x);
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    int pop() {
+        int res;
+        if(!dq.empty()){
+            res = dq.back(); //栈的顶端就是刚压进栈的元素
+            dq.pop_back(); //是将队尾元素弹出去
+        } 
+        return res;
+    }
+    
+    /** Get the top element. */
+    int top() {
+        return dq.back();// 队尾的元素
+    }
+    
+    /** Returns whether the stack is empty. */
+    bool empty() {
+        return dq.empty();
+    }

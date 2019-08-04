@@ -1,0 +1,29 @@
+//买卖股票的最佳时机
+//给定一个数组, 它的第i个元素是一支给定股票的第i天的价格
+//假定你最多只能进行一笔交易(即买入或卖出一支股票) --- 现需你设计出使得利润最大的买卖方法
+
+	/* 只能买或者卖
+    prices[i] = 第i + 1天的价格// 这里i从0开始
+    求最大利润
+    
+    (赚钱)卖出的价格需要大于买入的价格，否则输出为0
+    
+    前i天的最大收益=max{前i-1天的最大收益， 第i天的价格-前i-1天中的最小价格}
+    */
+    int maxProfit(vector<int>& prices) {
+        int buy = INT_MAX;//最小买入数
+        
+        int profit = 0;
+        for(int i = 0; i < prices.size(); i ++){
+        
+            if(prices[i] < buy){
+                //buy只有出现比它小的数才更新
+                buy = prices[i];
+            }
+            //之前错误的原因是不构成if - else关系
+            profit = max(profit, prices[i] - buy); //每次都更新一下最大值(过程中进行比较)
+        }
+        
+        //输出时需要设置
+        return profit > 0 ? profit : 0;
+    }

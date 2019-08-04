@@ -1,0 +1,79 @@
+//用栈实现队列
+//注意需结合栈和队列的特点进行(因此我下面使用的vector虽然方面, 但是应该算是不符合题目要求的)
+//因此可以使用两个栈(input & output)
+private: vector<int> v;
+public:
+    /** Initialize your data structure here. */
+    MyQueue() {
+        
+    }
+    
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        v.push_back(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {//移除队列头部的元素
+        int res = v.front();
+        v.erase(v.begin(), v.begin() + 1);
+        
+        return res;
+    }
+    
+    /** Get the front element. */
+    int peek() {
+        return v.front();
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return v.empty();
+    }
+
+//法2 --- 
+private: stack<int> input, output;
+public:
+    /** Initialize your data structure here. */
+    MyQueue() {
+        
+    }
+    
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        input.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {//移除队列头部的元素
+        
+        //栈只能在top端进行数据的操作, 所以我们出队列时就将(入)栈中的所有元素都依次
+        //放入(出)栈中去 然后再返回其顶端的元素(output.top())
+        if(output.empty()){
+            while(!input.empty()){
+                output.push(input.top());
+                input.pop();
+            }
+        }
+        
+        int res = output.top();
+        output.pop();
+        return res;
+    }
+    
+    /** Get the front element. */
+    int peek() {//返回队头元素
+        if(output.empty()){
+            while(!input.empty()){
+                output.push(input.top());
+                input.pop();
+            }
+        }
+        int res = output.top();
+        return res;
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return input.empty() && output.empty();
+    }

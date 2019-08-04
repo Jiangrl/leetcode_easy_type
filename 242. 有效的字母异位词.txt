@@ -1,0 +1,23 @@
+//有效的字母异位词
+//给定字符串s & t, 即相同字母的个数相同 但是位置可以不同!
+
+  	//return sorted(s) == sorted(t) 牛批!!!
+    bool isAnagram(string s, string t) {
+        
+        //字母异位词 相同字母数一样
+        map<char, int> mp;
+        for(int i = 0; i < s.length(); i ++){
+            mp[s[i]] ++;
+        }
+        
+        for(int j = 0; j < t.length(); j ++){
+            mp[t[j]] --;
+            if(mp[t[j]] <  0) return false;
+        }
+        
+        for(int k = 0; k < mp.size(); k ++){
+            if(mp[k] > 0) return false;
+        }
+        
+        return true;
+    }

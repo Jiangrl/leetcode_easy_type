@@ -1,0 +1,34 @@
+//有效的完全平方数
+//给定一个正整数num, 若其是一个完全平方数(num == a * a), 则返回true, 否则返回false.
+
+	//可以利用误差在指定范围内满足要求
+    //也可以使用二分查找的方法
+    //利用1+3 + 5 + ... + (2n - 1) = (1 + 2 * n - 1) * n / 2 = n^2的结论
+    bool isPerfectSquare(int num) {
+        
+        //一定要注意是否会出现溢出情况
+        //第二就是因子的取值范围情况
+        long int low = 1, high = num ;
+        while(low <= high){
+            long int mid = (low + high) / 2;
+            if(mid * mid == num) return true;
+            
+            else if(mid * mid > num) high = mid - 1;
+            
+            else low = mid + 1;
+        }
+        return false;
+    }
+    
+    /**利用等差数列的结论
+    if(num == 1) return true;
+        long int sum = 0; //防止溢出
+        
+        for(int i = 1; i <= num / 2 + 1; i += 2){//(num / 2 + 1 就是为了出现num = 1 | 9这种情况这种情况)
+            
+            sum += i;
+            if(sum == num) return true;
+        }
+        
+        return false;
+    */ 

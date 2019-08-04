@@ -1,0 +1,36 @@
+//反转字符串中的元音字符
+//输入一个string(input), 反转其中的元音字符('a', 'e', 'i', 'o', 'u')
+
+	string reverseVowels(string s) {
+        //char [] vowels = {'a', 'e', 'i', 'o', 'u'};
+       
+        string vowels = "aeiouAEIOU"; 
+        //string find() 返回的是下标值
+        int l = 0, r = s.size() - 1;
+        while(l < r){
+            
+            //可以将几种情况都列举出来啊
+            if(isVowels((s[l]))&& isVowels(s[r])){
+                swap(s[l ++], s[r --]);
+            }
+            //左边的是元音字母了, 我们就去右边去找到一个元音字母为止 然后来进行交换
+            else if(isVowels((s[l]))) r --;
+            else if(isVowels(s[r]))  l ++;
+            else{// 都不是 
+                l ++, r --; 
+            } 
+        }
+        
+        return s;
+    }
+    
+    bool isVowels(char ch){ //判断是否为元音字母
+        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'
+            || ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U';
+    }
+    
+    void swap(char &a, char &b){
+        char tmp = a;
+        a = b;
+        b = tmp;
+    }

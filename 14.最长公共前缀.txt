@@ -1,0 +1,27 @@
+//最长公共子前缀
+//给定一组字符数组, 找它们的最长公共前缀 | 若无则return "";
+
+// 最长: 公共前缀的字符的长度最长; 公共前缀: 所有的字符串都有的"前缀"(公共字符串)
+
+	string longestCommonPrefix(vector<string>& strs) {
+        
+        //一定要进行特殊情况分析!!! --- 发现 and 避免问题的地方
+        if(strs.size() == 0) return "";
+        sort(strs.begin(), strs.end()); //排个序(按照字典顺序进行排列)
+        
+        //所有的 公共前缀 
+        string a = strs[0], b = strs[strs.size() - 1];
+        
+        int i = 0, j = 0;
+        while(i < a.size() && j < b.size()){
+            
+            if(a[i] == b[j]){
+                i ++; 
+                j ++;
+            }
+            else break;
+        }
+        
+        //
+        return a.substr(0, i); //调用substr()函数 切割0-i的字符长度
+    }

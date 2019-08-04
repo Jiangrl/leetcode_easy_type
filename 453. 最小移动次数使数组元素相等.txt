@@ -1,0 +1,20 @@
+//最小移动次数使数组元素相等
+//定义: 给定一个长度为n的非空整数数组, 找到让所有数组移动次数. 其中每次移动都可以是n-1个数+1.
+
+	int minMoves(vector<int>& nums) {
+        
+        //移动一次 可以使n-1个元素增加1. 简单的数学推导过程!
+        // x * (n - 1) + sum(nums) = n * nums[0] --> 最终的结果0
+        
+        // x = n * (min + x) / (n - 1)
+        if(nums.size() == 0) return 0;
+        
+        int min_val = nums[0];
+        long sum = nums[0]; // sum 稍微放大一点!!
+        for(int i = 1; i < nums.size(); i ++){
+            min_val = min(min_val, nums[i]);
+            sum += nums[i];
+        }
+
+        return sum - min_val * nums.size(); //数学化 --- 如何防止溢出
+    }

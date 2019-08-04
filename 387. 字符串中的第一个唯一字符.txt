@@ -1,0 +1,23 @@
+//字符串中的第一个唯一字符
+//给定一个字符串, 找到第一个不重复的字符 并返回它的索引 若无则返回-1.
+
+	int firstUniqChar(string s) {
+        
+        if(s.empty()) return -1;
+        
+        map<char, int> mp1; // char和个数
+        map<char, int> mp2;  // char 和下标
+        for(int i = 0; i < s.length(); i ++){
+            mp1[s[i]] ++; //先建立映射关系
+            mp2[s[i]] = i;
+        }
+        
+        int minIndex = INT_MAX;
+        for(int j = 0; j < s.size(); j ++){// 在过程中找出最小的索引下标
+            if(mp1[s[j]] == 1 && mp2[s[j]] < minIndex){
+                minIndex = mp2[s[j]];
+            }
+        }
+        
+        return minIndex != INT_MAX ? minIndex : -1; //最后判定一下 防止没有出现重复字符
+    }

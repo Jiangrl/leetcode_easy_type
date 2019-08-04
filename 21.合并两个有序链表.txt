@@ -1,0 +1,52 @@
+//合并两个有序链表
+
+//给定两个有序链表 将二者合并起来! 即新链表包含了两个链表的所有的节点
+
+//1.可以使用递归调用 --- 最简单的方法
+//2.使用直接使用循环
+//3.归并
+
+//注意链表操作时一定不可以断链 而且其顺序遍历是对一个一个节点的访问
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        
+        //第一步分析特殊情况
+        if(l1 == NULL) return l2;
+        if(l2 == NULL) return l1;
+        
+        //当后也可以直接建立一个虚拟的节点如 new ListNode(-1); 结果输出时指向result->next即可!
+        //存第一个节点 存值小的节点
+        ListNode *head = NULL; //空链表
+        if(l1->val < l2->val){
+            head = l1;
+            l1 = l1->next;
+        }
+        else{
+            head = l2;
+            l2 = l2->next;// l1 l2需要移动
+        }
+
+        //存结果
+        ListNode *result = head;
+        while(l1 && l2){
+            //取小的先加入到输出链表中
+            if(l1->val < l2->val){
+                head->next = l1;
+                l1 = l1->next;
+            }
+            else{
+                 head->next = l2;
+                 l2 = l2->next;
+            }
+            head = head->next;// head要往后移动啊
+        }
+        
+        //链表长度不唯一 将某一个未访问完的链表拼接上去 即只做其中一个if判断内的语句
+        if(l1){
+             head->next = l1;//全部加上去
+        }
+        if(l2){
+             head->next = l2;
+        }
+        
+        return result;
+    }

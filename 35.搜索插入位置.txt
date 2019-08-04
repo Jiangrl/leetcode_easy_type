@@ -1,0 +1,14 @@
+//搜索插入位置
+//给定一个排序数组nums 和一个target 
+//如果在nums中找到一个值nums[i] == target --- 返回其下标 | 否则找到一个插入位置返回
+
+	int searchInsert(vector<int>& nums, int target) {
+        
+        for(int i = 0; i < nums.size(); i ++){
+        	//根据以上的情况可以将它们进行合并 即如下:
+            if(nums[i] >= target){//可以直接分情况讨论
+                return i;
+            }
+        }
+        return nums.size();
+    }

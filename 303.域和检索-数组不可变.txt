@@ -1,0 +1,30 @@
+//区域和检索-数组不可变
+//给定一个数组nums, 求出数组从索引i - j(i <= j)范围内元素的总和, 包括i ,j两点.
+
+private:
+    vector<int> sums;
+public:
+    NumArray(vector<int> nums) {
+        int len = nums.size();
+        
+        sums.resize(len);// 给vector设置大小
+        
+        if(len == 0) return;
+        
+        sums[0] = nums[0];
+        
+        //这题的意思就是反复曾经已经计算过的数组，思路很清楚，就是有点懵
+        for(int i = 1; i < len; i ++){
+            sums[i] = sums[i] + sums[i - 1] + nums[i];
+        }
+    }
+    
+    int sumRange(int i, int j) { //***多次调用
+        if(i == 0){
+            return sums[j];
+        }
+        else{
+            // 不是sums[i], 包含了i & j这两点的值的.
+            return sums[j] - sums[i - 1]; //sum[j]是包含i之前的那组数的和的
+        }
+    }

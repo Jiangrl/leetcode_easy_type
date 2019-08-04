@@ -1,0 +1,15 @@
+//路径总和
+//给定一个二叉树 和 target, 判断该树中是否存在根节点到叶子节点的路径 并且使得路径上的节点数字和加起来等于target
+
+	bool hasPathSum(TreeNode* root, int sum) {
+        
+        if(root == NULL) return false;
+        
+        //这个时候是叶子节点(一定到了叶子节点!)
+        if(root->left == NULL && root->right == NULL){
+            return root->val == sum;
+        }
+      
+        return hasPathSum(root->left, sum - root->val) || 
+                        hasPathSum(root->right, sum - root->val);
+    }

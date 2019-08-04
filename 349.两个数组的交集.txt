@@ -1,0 +1,24 @@
+//两个数组的交集
+//注意交集(set)中的每个元素唯一
+    
+    // 1.先排序 再遍历寻找
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        
+        //2. 利用stl中的set & vector的已有方法
+        //back_inserter 创建一个push_back()的迭代器
+        //如set_intersection(a.begin(), a.end(), b.begin(), b.end(), back_inserter(res));
+
+        set<int> s(nums1.begin(), nums1.end());// 先将nums1中的数据元素都加到新建的set集合中去
+        vector<int> res;
+        for(int i = 0; i < nums2.size(); i ++){
+            if(s.find(nums2[i]) != s.end()){// find()返回一个查找元素的迭代器 只要没到尾部
+                
+                //我们利用的是push_back() find()查找失败则返回end的迭代器
+                if(find(res.begin(), res.end(), nums2[i]) == res.end()){ // 并且其中没有这个数据元素!
+                    res.push_back(nums2[i]); 
+                }
+                
+            }
+        }
+        return res;
+    }

@@ -1,0 +1,19 @@
+//反转字符串
+//给定的是一个字符数组, 需要我们在原数组将这个数组反转过来(即反转此字符串)
+	
+	//只能原地翻转
+    void reverseString(vector<char>& s) {
+        
+        int l = 0, r = s.size() - 1;
+        while(l <= r){
+            swap(s[l], s[r]);
+            l ++;
+            r --;
+        }
+    }
+    
+    void swap(char &a, char &b){
+        char tmp = a;
+        a = b;
+        b = tmp;
+    }

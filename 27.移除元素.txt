@@ -1,0 +1,20 @@
+//移除元素
+//给定一个数组nums 和 一个给定的值val  原地删除数组中nums[i] == val
+
+//等于val 可以直接遍历数组即可
+//原地删除 我们可以考虑将这些元素集中到一块 然后再集中移除
+
+	int removeElement(vector<int>& nums, int val){
+    
+        int len = nums.size();
+        int j = 0;
+        for(int i = 0; i < len; i ++){
+            if(nums[i] == val){ //就是相同的元素我将它们集中到这个数组的前面来
+                swap(nums[j ++], nums[i]);
+            }
+        }
+        //在leetcode中 很多使用的都是vector 因此我们要熟练使用其已有的函数方法 
+        nums.erase(nums.begin(), nums.begin() + j);// 移除从开始 - j的数据元素即可
+        
+        return nums.size();
+    }

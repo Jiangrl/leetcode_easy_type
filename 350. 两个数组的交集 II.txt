@@ -1,0 +1,22 @@
+//两个数组的交集II
+//在交集中某一元素的出现次数 应该和其在nums1 & nums2中出现的次数相对应
+
+	vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        
+        map<int, int> mp; //使用一个map进行数据元素和出现次数的映射关系!
+        for(int i = 0; i < nums1.size(); i ++){
+            if(mp[nums1[i]] == 0){
+                mp[nums1[i]] = 1;
+            }
+            else mp[nums1[i]] ++;
+        }
+        
+        vector<int> res;
+        for(int j = 0; j < nums2.size(); j ++){
+            if(mp[nums2[j]] > 0){
+                res.push_back(nums2[j]);
+                mp[nums2[j]] --; //因为次数确定，我每加入一个就 -- 即可。
+            }
+        }
+        return res;
+    }

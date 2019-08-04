@@ -1,0 +1,21 @@
+//环形链表
+//给定一个链表 判断是否存在环
+
+	//原链表上判环问题，我们发现这不是线性数组，可以使用下标， 我们考虑使用先遍历 建立映射关系
+    //此外我们可以使用两个指针(两个节点)一起移动，一个快一个慢 如果有环它们一定会相遇的
+    
+    //也可以将过程中的节点数值给存在set中，当set中contain() 即说明有环
+    bool hasCycle(ListNode *head){
+        
+        //快慢指针法
+        ListNode *fast = head, *low = head;
+        while(fast && fast->next){//注意这里的循环条件
+           
+            fast = fast->next->next;
+            low = low->next;
+            //链表中一定要注意是不是接节点的移动，然后还要注意是否为空
+            if(fast == low) return true;
+        }
+        
+        return false;
+    }

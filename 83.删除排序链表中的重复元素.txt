@@ -1,0 +1,22 @@
+//删除排序链表中的重复元素
+//已知链表是有序的 然后保持不断链即可
+
+	ListNode* deleteDuplicates(ListNode* head) {
+        
+        if(head == NULL || head->next == NULL) return head;
+        ListNode *cur = head; 
+        
+        //使用一个前驱的节点进行移动就是防止 next "过多" 使得最后自己混淆了
+        //ListNode *pre = head->next; // pre要一起移动
+        
+        //注意点操作符 和 ->操作符的不同
+        while(cur->next){
+            if(cur->next->val == cur->val){
+                cur->next = cur->next->next; //直接跳过
+            }
+            else cur = cur->next;
+            
+        }
+        
+        return head; //注意之后返回的来链表id cur它是相当于一个节点 当前的节点 即最后一个lastNode
+    }

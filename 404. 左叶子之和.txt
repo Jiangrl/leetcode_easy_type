@@ -1,0 +1,16 @@
+//左叶子之和
+//计算给定二叉树中所有左叶子节点之和.
+
+ 	// 怎么定义左叶子啊
+    int sum(TreeNode* root, bool isLeaf){ //判断是否为叶子节点
+        if(root == NULL) return 0;
+        
+         if(isLeaf && root->left == NULL && root->right == NULL){
+            return root->val;
+        }
+        return  sum(root->left, true) + sum(root->right, false);
+    }
+
+    int sumOfLeftLeaves(TreeNode* root) {
+        return sum(root, false);
+    }

@@ -1,0 +1,26 @@
+//字符串中的单词数
+//统计字符串中的单词个数, 这里的一个单词是指连续的不是空格的字符
+
+
+	int countSegments(string s) {
+        
+        int len = s.length();
+        
+        if(len == 0) return 0;
+        
+        int res = 0;
+        int start = 0; 
+        for(int i = 0; i < len; i ++){
+            if(start == 1 && s[i] == ' '){ // 空格隔开(分隔符) 但为了防止是出现在字符串的起始位置等情况
+                res ++;
+                start = 0;
+            }
+
+            if(s[i] != ' '){// 不是空的时候设置一下start的值
+                start = 1; // 设置一个第一次出现的值
+            }
+        }
+        
+        if(start > 0) res += 1;
+        return res;
+    }

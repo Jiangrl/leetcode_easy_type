@@ -1,0 +1,23 @@
+//最大子序和
+//给定一个整数数组nums 找出其中具有最大和的连续子序列数组(至少包含一个数据元素)
+
+
+	// 因为是连续的子数组
+    int maxSubArray(vector<int>& nums) {
+       
+        int res = nums[0]; // result结果存储第一个数
+        int sum = 0; // 求和
+        
+        for(int i = 0; i < nums.size(); i ++){
+            if(sum > 0){//继续累加
+                sum += nums[i];
+            }
+            else{//否则从当前节点出发
+                sum = nums[i];
+            }
+            
+            res = max(res, sum); //在过程中寻找最大值
+        }
+        
+        return res;
+    }

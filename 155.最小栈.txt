@@ -1,0 +1,35 @@
+//最小栈
+//设计一个支持push pop top操作, 并能在常数时间内检索到最小元素的栈
+
+//即在栈的基础上 要求能够常数时间内return minValue.
+private:
+    stack<int> st;
+    stack<int> min_st; //存过程的min minValue是在变化的
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+        //我们知道函数的不断调用过程其实就是把过程中的调用点压栈
+        //因此在这里我们可以模拟这个过程minValue在变化 但是可能会用到之前的minValue值 //因此我们可以将这个过程用栈的形式表示出来 --- 设置一个min_st的栈
+    }
+    
+    void push(int x) {
+        
+        //特殊情况分析
+        if(min_st.empty() || min_st.top() >= x) min_st.push(x);
+        st.push(x);
+    }
+    
+    void pop(){
+        
+        //刚好最小栈的top 和 st的top一样
+        if(st.top() == min_st.top()) min_st.pop();
+        st.pop();
+    }
+    
+    int top() {
+        return st.top();
+    }
+    
+    int getMin() {// 常数时间内
+        return min_st.top();
+    }

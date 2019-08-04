@@ -1,0 +1,29 @@
+//杨辉三角
+//给定一个非负numRows, 生成杨辉三角的前numRows行
+//
+
+    vector<vector<int>> generate(int numRows) {//numRows是杨辉三角的前这么多行
+        
+        vector<vector<int>> res;
+        
+        if(numRows == 0) return res;
+        
+        //初始化前两行 第一行为一个1 第二行为两个1. ---
+        res.push_back(vector<int>(1, 1));
+        if(numRows == 1) return res;
+        
+        res.push_back(vector<int>(2, 1));
+        if(numRows == 2) return res;// 前两行是特殊情况需要单独判断
+        
+        for(int i = 2; i < numRows; i ++){
+            
+            vector<int> tmp(i + 1, 1);// 先给这一行几个数赋初值
+
+            for(int j = 1; j < i; j ++){//每一行只有几个元素需要进行处理
+                tmp[j] = res[i - 1][j - 1] + res[i - 1][j]; // 杨辉三角处理的规律
+            }
+            res.push_back(tmp);
+        }
+        
+        return res;
+    }

@@ -1,0 +1,35 @@
+//报数
+//报数序列是一个整数序列, 按照其中的整数的顺序进行报数, 得到了下一个数
+// "1" ： 一个1 - "11"
+//"11" : 两个1 - "21"
+//"21" : 一个2一个1 - "1211"
+//"1211" : 一个1一个2两个1 - "111221"
+
+	//按照整数的顺序进行读 注意怎么读即可
+    //找规律的题
+    string countAndSay(int n) {
+        
+        //string s[n  + 1];// 设置一个string数组 --- 容易超时
+        string pre = "1", cur = "1";
+        
+        for(int i = 2; i <= n; i ++){
+            cur = "";
+            int count = 1;// 一个字符的个数就算size为1
+            for(int j = 0; j < pre.size() - 1; j ++){
+               if(pre[j] == pre[j + 1]){
+                   count ++;
+               }
+               else{
+                    cur += to_string(count);
+                    cur += pre[j]; //分开添加
+                    count = 1;
+               } 
+            }
+            //最后一个字符
+            cur += to_string(count);
+            cur += pre[pre.length() - 1]; //分开添加
+            pre = cur; //更新这个"前字符"
+        }
+        
+        return cur;
+    }

@@ -1,0 +1,36 @@
+//罗马数字转数字
+//罗马数字和阿拉伯数字的对应关系:
+/*
+I 1
+V 5
+X 10
+L 50
+C 100
+D 500
+M 1000
+
+一般情况下: 小的数字可以放在大的数字右边
+(但也存在此6种情况为特例)
+IV 4 | IX 9 | XL 40 | XC 90 | CD 400 | CM 900 
+*/
+  //用一个函数转换 比较麻烦 可以直接用一个map<key, value>将它们对应在一起
+  int romanToInt(string s) {
+        
+        map<char, int> words;
+        words['I'] = 1; words['V'] = 5; words['X'] = 10; words['L'] = 50; words['C'] = 100;
+        words['D'] = 500; words['M'] = 1000;
+        
+        int len = s.length();
+        
+        int res = 0;
+        for(int i = 0; i < len - 1; i ++){
+           if(words[s[i]] >= words[s[i + 1]]){// 小的在大的右边(相邻的两个数字)
+               res += words[s[i]];
+           } 
+           else res -= words[s[i]]; 
+        }
+        
+        res += words[s[len - 1]];//最后一个字符
+        return res;
+  }
+    

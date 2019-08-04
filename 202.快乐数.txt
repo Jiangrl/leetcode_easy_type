@@ -1,0 +1,28 @@
+//快乐数
+//对一个正整数, 每一次将该数替换为它每个位置上数的平方和, 然后重复这个过程直到这个数字为1, 当然也可能一直变换不到1
+//若可以变换为1 --- 则称其为快乐数
+
+	bool isHappy(int n) {
+        
+        if(n == 1) return true;
+        //设置一个最大的次数
+        int maxCount = 100;
+        int count = 0;
+        while(n != 1 && count < maxCount){ //否则总不能一直进行下去吧
+            int sum = 0;
+             
+            while(n){
+                sum += (n % 10) * (n % 10);
+                n /= 10;
+            }
+            
+            n = sum;// 每次赋新值很重要
+            count ++; //变换一次则+1
+            
+            if(n == 1){//每次都做一个判断
+                return true;   
+            } 
+        }
+          
+       return false;
+    }

@@ -1,0 +1,27 @@
+//整数反转
+要求: 将一个32位的有符号数的整数进行反转
+// sum += sum * 10 + num % 10; // 取余
+
+//常见的问题： ***溢出的问题 INT_MAX / INT_MIN
+ 	/**
+    整数范围的界限情况：要考虑清楚
+    在进行数的操作时, 除了考虑到常见的如 除数不能为0(a / b && b != 0)
+    INT_MAX= 2^31 - 1(2 147 483 647); INT_MAX = -2^31 
+    */
+    int reverse(int x) {
+        
+        //直接在过程中判断，不用考虑正负
+        int sum = 0;
+        while(x){
+            int car = x % 10;
+            
+            //car == 7 和 -8分别是MAX 和 MIN的尾数(即个位上的值) 
+            if(sum > INT_MAX / 10 || (sum == INT_MAX / 10 && car > 7)) return 0;
+            if(sum < INT_MIN / 10 || (sum == INT_MIN / 10 && car < -8)) return 0;
+            //对这个式子进行分析 sum * 10 + car
+            sum = sum * 10 + car;
+            x /= 10;
+        }
+          
+        return sum;
+    }

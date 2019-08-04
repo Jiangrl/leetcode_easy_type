@@ -1,0 +1,9 @@
+//删除链表中的节点
+
+	void deleteNode(ListNode* node) {//你将只被给定被删除的节点.
+        
+        //这一题很好玩，到底是什么意思? 题目的意思大致就是它可以删除一个给定的非末尾节点即可
+        //也就是说能删除即可。可以看作node就是需要删除的这个节点
+        node->val = node->next->val;
+        node->next = node->next->next;
+    }

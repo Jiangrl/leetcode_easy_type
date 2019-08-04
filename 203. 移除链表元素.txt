@@ -1,0 +1,22 @@
+//移除链表元素
+//移除链表中等于给定值val的所有节点
+
+	ListNode* removeElements(ListNode* head, int val) {
+        
+        if(head == NULL) return NULL;
+        
+        //遍历链表时 不要出现断链的情况
+        ListNode *p = head->next, *pre = head;
+        while(p){
+            
+            if(p->val == val){
+                //delete 所以直接覆盖就可以了, next -> next->next
+                pre->next = p->next; //直接改变指针指向即可!
+            }
+            else pre = pre->next;  //正常移动
+            
+            p = p->next;//遍历的操作基础上进行其它的操作, 所以要继续移动
+        }
+
+        return head->val == val ? head->next : head;//
+    }

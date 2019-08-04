@@ -1,0 +1,41 @@
+//验证回文串
+//给定一个字符串, 验证其是否为回文串. 只考虑数字和字母(可忽略字母大小写, 因此我们可调用函数全转换为大写或者小写)
+
+	//题设条件是只考虑字母和数字字符
+    //也就是说要忽略其他的字符
+    bool isPalindrome(string s) {
+        
+        //库函数全转换为小写，忽略大小写
+        //s begin - end, 第2个s.begin()是存放转换后结果的容器, ::tolower表示转换为小写 (toupper)
+        transform(s.begin(), s.end(), s.begin(), ::tolower);
+        //int len = s.size();
+        
+        //还可以先过滤掉那些空格等不参与判定的字符
+        int left = 0, right = s.size() - 1;
+        while(left <= right){
+            if(ff(s[left]) == NULL){
+                left ++;
+                continue;
+            }
+            
+            if(ff(s[right]) == NULL){
+                right --;
+                continue;//特征是后续的语句会继续执行
+            }
+            
+            if(s[left] != s[right]){
+                return false;
+            }
+            left ++;
+            right --;
+        }
+        return true;
+    }
+    
+    //判断是否符合题目比较的要求的字符类型
+    bool ff(char ch){
+        if((ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9')){
+            return true;
+        }
+        else return false;
+    }

@@ -1,0 +1,47 @@
+//单词规律
+//给定一种规律pattern 和一个字符串str, 判断其是否遵循相同的规律.
+
+	bool wordPattern(string pattern, string str) {
+        //题干条件：str中的每个非空单词间存在着 双向连接 的对应规律
+        //通过pattern找出规律 --- 怎样描述这个规律
+        
+        //if(pattern.length() == 0) return;
+        
+        vector<string> ve = cut(str);
+        
+        if(pattern.length() != ve.size()) return false;
+        map<char, string> mp;// ***利用map的映射特性 --- char是pattern中切割下的字符
+
+        for(int i = 0; i < pattern.length(); i ++){
+            
+            if(mp.count(pattern[i]) > 0){
+                if(mp[pattern[i]] != ve[i]) return false;
+            }
+            else mp[pattern[i]] = ve[i];// 建立映射关系
+        }
+        
+        //防止出现像示例4一样的情况str = "dog dog dog dog"
+        set<char> p(pattern.begin(), pattern.end()); // 全都塞进set集合中, 去重
+        set<string> v(ve.begin(), ve.end());
+        
+        if(p.size() != v.size()) return false; //判断二者长度的关系!
+        return true;
+    }
+    
+    //如何切割字符串 --- 按照分割的要求
+    vector<string> cut(string str){
+        
+        vector<string> res;
+        string s = "";
+        for(int i = 0; i < str.length(); i ++){
+            
+            if(str[i] == ' '){
+                res.push_back(s);
+                s = "";
+            }
+            else s += str[i];// 直接拼接速度更快
+        }
+        
+        res.push_back(s);
+        return res;
+    }

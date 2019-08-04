@@ -1,0 +1,21 @@
+//两数之和
+题目：(详情可自行查看). 根据所给的条件：一个未知顺序的数组nums, 目标值target. 
+然后找到nums[i] + nums[j] == target, 且i != j(一个元素不可以重复使用).
+最后将它们的下标(以数组的形式)返回. 
+假定答案只有一种! 即找到一组可行解即可。
+
+参考代码:
+	//每次选取两个数即可 
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> v;
+        //未知是否有序
+        for(int i = 0; i < nums.size(); i ++){
+            for(int j = i + 1; j < nums.size(); j ++){ //从当前元素往后找即可!
+                if(nums[i] + nums[j] == target){
+                    v.push_back(i);
+                    v.push_back(j);
+                }
+            }
+        }
+        return v;
+    }

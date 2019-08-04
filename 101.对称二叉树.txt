@@ -1,0 +1,16 @@
+//101.对称二叉树
+//给定一个二叉树, 检查它是否是镜像对称的
+
+	//直接使用两个树来进行对称 --- 分别 r->left 和 r->right进行比较即可 所有满足才为镜像(对称二叉)树
+	bool isMirror(TreeNode* r1, TreeNode* r2){
+        if(!r1 && !r2) return true;
+        if(!r1 || !r2 || r1->val != r2->val) return false;
+        if(r1->val == r2->val){
+            return isMirror(r1->left, r2->right) && isMirror(r1->right, r2->left);
+        }
+        return false;
+    }
+
+    bool isSymmetric(TreeNode* root) {
+        return isMirror(root, root); 
+    }

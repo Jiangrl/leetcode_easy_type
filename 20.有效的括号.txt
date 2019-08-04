@@ -1,0 +1,34 @@
+//有效的括号
+//括号种类 () [] {}
+//"有效的"定义: 1.左括号必须是*相同类型*的右括号 2.左括号必须以正确的顺序闭合
+//注意 "" is valid
+
+//可以使用一个栈 左括号则进栈 当为右括号时 则根据以上的3种情况匹配 匹配成功则出栈
+//最后如果这个栈为空 则说明给定的s为合法
+	bool isValid(string s) {
+        stack<char> st;
+	    for(int i = 0; i < s.length(); i ++){
+		    if(s[i] == '[' || s[i] == '{' || s[i] == '('){
+			    st.push(s[i]);	
+		    }
+		    else{
+			    if(st.empty()) return false; 
+                
+                if(st.top() == '[' && s[i] == ']'){
+			        st.pop();
+		        }
+		        else if(st.top() == '{' && s[i] == '}'){
+			        st.pop();
+		        }
+                else if(st.top() == '(' && s[i] == ')'){
+			        st.pop();
+		        }
+		        else{
+			        return false;
+		        }
+		    } 
+	    }
+	
+	    if(st.empty()) return true;
+	    else return false;
+    }

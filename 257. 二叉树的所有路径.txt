@@ -1,0 +1,26 @@
+//二叉树的所有路径
+//给定一个二叉树, 返回从根节点到叶子节点的路径. (以给定字符串的形式输出)
+
+	void depth_search(TreeNode* root, vector<string>& res, string temp){
+	
+		//找到了一条路径, 则将这条路径的string(形式)插入到最后的结果集中.
+        if(root->left == NULL && root->right == NULL) res.push_back(temp);
+        
+        //根据路径的定义, 左右子树不为空则继续往下走
+        if(root->left){
+            depth_search(root->left, res, temp + "->" + to_string(root->left->val));
+        }
+        if(root->right){
+            depth_search(root->right, res, temp + "->" + to_string(root->right->val));
+        }
+    }
+
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string> res;
+        if(root == NULL) return res;
+        
+        string temp = to_string(root->val);//从根节点出发
+        depth_search(root, res, temp);
+        
+        return res;
+    }

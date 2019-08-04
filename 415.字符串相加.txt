@@ -1,0 +1,41 @@
+//字符串相加
+//给定两个字符串形式的非负整数num1和 num2, 计算它们的和.
+
+	string addStrings(string num1, string num2) {
+        
+        //需不需要补齐?
+        //不包含前导零
+        int carry = 0;
+        int i = num1.size() - 1, j = num2.size() - 1, k = 0;
+        
+        string res = "";
+        
+        while(i >= 0 && j >= 0){
+            
+            int sum = num1[i --] - '0' + num2[j --] - '0' + carry;
+            carry = sum / 10; // 更新
+            
+            res += to_string(sum % 10); 
+        }
+        
+        //未执行完毕 //可能有点并没有加完 两个长度未知是否相等  i | j 只其中一次.
+        while(i >= 0){
+            int sum = num1[i --] - '0' + carry;
+            carry = sum / 10; // 更新
+            
+            res += to_string(sum % 10); 
+        }
+
+        while(j >= 0){
+            int sum = num2[j --] - '0' + carry;
+            carry = sum / 10; // 更新
+            
+            res += to_string(sum % 10); 
+        }
+        
+        if(carry > 0) res += to_string(carry); 
+        
+        reverse(res.begin(), res.end()); // void类型的函数
+
+        return res;
+    }

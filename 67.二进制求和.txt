@@ -1,0 +1,33 @@
+//二进制求和
+//给定两个二进制字符串 返回它们相加的和(依然以二进制的形式表示)
+
+	//二进制求和再以二进制的结果输出
+    string addBinary(string a, string b) {
+        
+        int len1 = a.length(), len2 = b.length();
+        
+        if(len1 == 0 && len2 == 0) return "";
+        
+        //在进行计算前 我们可以先将两个二进制数对齐(即高位补0)
+        int max = len1 > len2 ? len1 : len2;
+        
+        //直接调用string中的方法  //还可以使用append()的方法
+        string aa = string(max - len1, '0') + a, bb = string(max - len2, '0') + b;
+
+       	
+        string res = aa;
+        int carry = 0;// 然后结合进位关系进行计算(常见的二进制计算 逢2进1)
+        for(int i = max - 1; i >= 0; i --){
+            int tmp1 = aa[i] - '0', tmp2 = bb[i] - '0';
+            int temp = tmp1 + tmp2 + carry;
+        
+            carry = temp / 2;
+            
+            res[i] = temp % 2 + '0'; // 因为这里使用的是res[i] 因此我们在定义string时就不能定义为""
+        }
+        
+        if(carry > 0)
+            res = string(1,'1') + res;
+        
+        return res;
+    }

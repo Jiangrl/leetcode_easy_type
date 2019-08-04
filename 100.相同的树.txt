@@ -1,0 +1,15 @@
+//相同的树
+//给定两个二叉树 判断它们是否相同
+
+	bool isSameTree(TreeNode* p, TreeNode* q) {
+        
+        if(p == NULL && q == NULL) return true;
+        
+        if(p && q && p->val == q->val){
+        	//递归调用 保证这个左右都相同
+            return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+        }
+        else {
+            return false;
+        }
+    }

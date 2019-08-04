@@ -1,0 +1,18 @@
+//颠倒的二进制位
+//颠倒一个32位无符号数整数的二进制位
+
+	uint32_t reverseBits(uint32_t n) {
+       
+        //1. reverse c++中貌似没有这个方法
+        //2. 手工操作此过程
+        //3. 使用bitset<> 库
+        uint32_t res = 0;
+        int i = 32;// 位数
+        while(i --){
+            res <<= 1; //左移一位
+
+            res += n & 1; // n & 1取二进制的最后一位
+            n >>= 1; // 右移一位
+        }
+        return res;
+    }

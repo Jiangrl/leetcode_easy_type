@@ -1,0 +1,29 @@
+//x的平方根
+//计算并返回x的平方根 其中x是非负数
+
+	int mySqrt(int x) {
+        
+        //当时没注意看 直接使用了这个方法 其实是为了实现这个方法
+        return (int)sqrt(x);
+    }
+    // 还可以使用牛顿迭代法 
+    //二分法  
+    int mySqrt(int x) {
+        
+        if(x <= 1) return x;
+        long l = 1, r = x;
+        while(l < r){
+            //这里是取右中位数 如果取左中位数则会陷入死循环 如x = 8
+            // 1.mid = 1 + (8 - 1) / 2 = 4
+            // r = mid - 1= 3
+            //2. mid = 1 + (3 - 1) / 2 = 2
+            // mid < 8 / 2(4) l = mid = 2
+            // mid = 2 + (3 - 2) / 2 = 2(死循环了)
+            
+            long mid = l + (r - l + 1) / 2;
+            if(mid <= x / mid) l = mid;
+            else r = mid - 1;
+        }
+        
+        return (int)l;//因为这里返回的是l 
+    }

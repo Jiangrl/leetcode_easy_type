@@ -1,0 +1,25 @@
+//移动0
+//给定一个数组nums, 将0移动到数组的末尾, 并且保证其非零元素的相对顺序.
+	
+	//不使用额外的空间
+    //熟悉掌握容器的各种方法
+    //可以快慢移动
+    void moveZeroes(vector<int>& nums) {
+        
+        int len = nums.size();
+        
+        int  j = 0;
+        for(int i = 0; i < len; i ++){
+            
+            if(nums[i]){ // 当数据元素不是0的时候
+                swap(nums[j ++], nums[i]); //不断的替换
+            }
+            
+        }
+    }
+    
+    void swap(int &num1, int &num2){// 注意加引用
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+    }

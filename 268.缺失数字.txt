@@ -1,0 +1,30 @@
+//缺失数字
+//给定一个包含0....n中的n个数, 找出其中没有出现在那个序列中的数(即缺失的数)
+
+	//0 - n 一共n + 1个数
+	int missingNumber(vector<int>& nums){
+        //使用计数排序么?
+        vector<int> tmp(nums.size() + 1, 0);// 注意将空间调大一号(一共n + 1个数)，防止泄露
+        for(int i = 0; i < nums.size(); i ++){
+            tmp[nums[i]] ++;
+        }
+        
+        for(int i = 0; i <= tmp.size(); i ++){
+            if(tmp[i] == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //利用数学的常见公式(1 + n) * n / 2 + 0
+	int missingNumber(vector<int>& nums){
+    	int n = nums.size();
+        if(n == 0) return -1;
+        int sum = 0;
+        for(int i = 0; i < n; i ++){
+            sum += nums[i]; //遍历一遍求和
+        }
+        
+        return (n + 1) * n / 2 - sum;
+    }

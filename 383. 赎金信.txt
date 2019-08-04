@@ -1,0 +1,23 @@
+//赎金信
+//给定一个赎金信(ransom)字符串 和一个杂志(magazine)字符串
+//判断ransom 能不能有magazine字符串中的字符组成
+
+	bool canConstruct(string ransomNote, string magazine) {
+        
+        map<char, int> mp;
+        
+        //注意是用谁表示谁
+        for(int i = 0; i < magazine.size(); i ++){
+            
+            mp[magazine[i]] ++;
+        }
+        
+        for(int j = 0; j < ransomNote.size(); j ++){
+            
+             mp[ransomNote[j]] --;
+             if(mp[ransomNote[j]] < 0){
+                return false;
+            } 
+        }
+        return true;
+    }

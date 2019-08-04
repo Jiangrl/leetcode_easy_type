@@ -1,0 +1,27 @@
+//168.Excel表列名称
+//输入一个整数, 返回它在Excel表中对应的列名称
+示例:
+	1 -> A
+    2 -> B
+    3 -> C
+    ...
+    26 -> Z
+    27 -> AA
+    28 -> AB 
+    ...
+
+  	string convertToTitle(int n) {
+        
+        //先用数组存起来(利用下标和字符的对应的关系)
+        char s[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
+                    'O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+        
+        string res = "";
+        while(n > 0){
+            n --; //char[]中是下标从0开始
+            res = s[n % 26] + res; //拼接
+            n /= 26;
+        }
+        
+        return res;
+    }

@@ -1,0 +1,21 @@
+//平衡二叉树
+//给定的一个二叉树, 判断它是否是高度平衡的二叉树
+//
+
+ 	//转换成了递归求解树的高度的问题
+    bool isBalanced(TreeNode* root) {
+        
+        //判断其终止条件是什么 ---分情况讨论一下
+        if(root == NULL) return true;
+        //就是左右的高度差不小于1 不满足直接返回
+        if(abs(heightOftree(root->left) - heightOftree(root->right)) > 1) return false;
+        
+        //满足则继续判断 --- 必须左右子树均满足的!
+        else return isBalanced(root->left) && isBalanced(root->right);
+    }
+    
+    int heightOftree(TreeNode* root){
+        if(root == NULL) return 0;
+        
+        return 1 + max(heightOftree(root->left), heightOftree(root->right));
+    }

@@ -1,0 +1,29 @@
+//两数之和II-输入有序数组
+//输入一个有序(且为升序排列)数组nums 和 target(目标值) --- 找到两个数 nums[i] + nums[j] == target! 且 i < j
+//像这种类型的题目, 很容易联想到双指针移动 这样low & high 相当于遍历了一次数组(给定了只有一组解 找到了即可返回)
+
+
+	//将目标两个数的下标存下来，且要求是升序排序
+    vector<int> twoSum(vector<int>& numbers, int target) { //已知数组有序啊
+        
+        vector<int> res;
+        //错误分析，使用两个for循环会超时 
+        //我们有时会被所给的测试示例误导 比如 2 7 我们可能会直接想着用numbers[i - 1] + numbers[i] & target的关系
+        //比如这里直接判断相邻的关系
+        //那我们应该怎么分析这个问题呢？升序排列 - 找两个数据元素使得相加等于一个target目标值 --> 二分法 + 双指针移动
+        int low = 0, high = numbers.size() - 1;
+        while(low < high){
+            if(numbers[low] + numbers[high] == target){
+                res.push_back(low + 1);
+                res.push_back(high + 1); 
+                break;
+            }
+            else if(numbers[low] + numbers[high] > target){
+                high --;
+            }
+            else{
+               low ++;
+            }
+        }     
+        return res;
+    }

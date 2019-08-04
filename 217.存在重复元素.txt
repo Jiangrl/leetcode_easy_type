@@ -1,0 +1,16 @@
+//存在重复元素
+//给定一个数组, 判定是否存在重复元素(即元素出现了不止一次即为有重复元素)
+	
+	bool containsDuplicate(vector<int>& nums) {
+        
+        //直接借助set集合(利用其元素唯一性的特点) 
+        set<int> res;
+        for(int i = 0; i < nums.size(); i ++){
+            res.insert(nums[i]);
+        }
+        
+        return res.size() == nums.size() ? false : true;
+    }
+
+    //也可以先进行排序(sort()函数), 然后比较相邻元素是否相等.
+    

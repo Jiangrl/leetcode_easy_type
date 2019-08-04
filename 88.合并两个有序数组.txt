@@ -1,0 +1,33 @@
+//合并两个有序数组
+//给定两个有序数组nums1 和 nums2, 将nums2合并到nums1中 使得nums1成为一个有序数组(nums1的空间足够大).
+
+	void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        
+        //使用归并的思想就需要使用额外的空间了
+        //nums1 空间足够大 --- 尽量不占用额外的空间, 确定了将最后的数据元素存在nums1中
+        //不停的在空间各个位置放入元素容易出现问题， 因为合并两个升序的数组会使得最后的合并区间也是有序的
+        
+        //***方法1: 直接装进去 --- 排序 
+        // for(int i = m, j = 0; i < m + n && j < n; i ++, j ++){
+        //     nums1[i] = nums2[j];
+        // }
+        // sort(nums1.begin(), nums1.end());
+        
+        //特殊情况分析
+        if(nums2.empty()) return;
+        if(nums1.empty()){
+            nums1 = nums2;
+            return;
+        }
+        int i = m - 1, j = n - 1, k = m + n - 1; // 总长度
+        while(j >= 0){ // 访问nums
+            if(i < 0){// nums1的值已经访问结束了 只有nums2了
+                nums1[k --] = nums2[j --];
+            }
+            else if(nums1[i] > nums2[j]){
+                nums1[k --] = nums1[i --];
+            }
+            else nums1[k --] = nums2[j --];
+            //均是有序
+        }
+    }

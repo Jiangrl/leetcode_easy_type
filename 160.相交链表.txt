@@ -1,0 +1,30 @@
+//相交链表
+//编写一个程序 找到两个链表相交的起始节点
+
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        
+        //1.hash set建立对应的关系
+        //2.使用两个栈 入栈后出栈
+        
+        //相交的定义： 就是从相交部分起 后面的所有节点都相同(即相交后的长度是相等的)
+        //意味着两条链不为空的情况下 交互操作直至相同部分即为一条链
+        //3.即通过补齐短链表的长度 
+        if(headA == NULL || headB == NULL) return NULL;
+    
+        ListNode* p1 = headA, *p2 = headB;
+        
+        while(p1 != p2){
+             if(p1){ 
+                 p1 = p1->next;
+             }//p1 到链尾 --- 然后从headB继续遍历
+             else p1 = headB;
+             //当长指针所对应的链表指向短链表的头节点时, 则可以消除长度差!
+
+            if(p2){
+                 p2 = p2->next;
+             }
+             else p2= headA;
+        }
+        
+        return p2;
+    }

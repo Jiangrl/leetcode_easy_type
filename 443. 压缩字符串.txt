@@ -1,0 +1,36 @@
+//压缩字符
+//给定一个字符数组, 根据规则将其进行(原地)压缩 --- 将一段连续出现的进行压缩 a a a b b a a a 
+//这里前后的a是分两次进行压缩的.
+/*
+1. char.number = 1, 保留
+2. char.number > 1, char + char.number
+*/
+
+	int compress(vector<char>& chars) {
+        //压缩这个数组 长度<= original array
+        //都是char类型的数组
+        
+        //sort(chars.begin(), chars.end()); 一段一段的进行 区域性质的 
+        //是不是已经排序了???
+        
+        int count = 1;
+        int j = 0;
+        
+        chars.push_back(' '); //增加长度 +++ //否则最后一步在循环出去的时候还要继续判断
+        for(int i = 0; i < chars.size() - 1; i ++){ 
+            
+            if((chars[i] == chars[i + 1])) count ++; //先判断这个 --- 时间效率更高 这题字符分布的特征
+            else{
+                chars[j ++] = chars[i]; 
+                if(count > 1){
+                    string tmp = to_string(count);// 防止大于10
+                    //当出现> 10的情况时, 这个count统计值需要拆成几部分 以确保每个char中只有一个数字
+                    for(int k = 0; k < tmp.size(); k ++) chars[j ++] = tmp[k];
+                }
+                count  = 1;
+            }   
+            //else count ++;
+        }
+       	//返回的是进行压缩后字符数组的长度
+        return j; // 从这里截断// 这样就不用管删除元素了
+    }

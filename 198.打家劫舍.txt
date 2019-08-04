@@ -1,0 +1,24 @@
+//打家劫舍
+//如果两间相邻的房间在同一个晚上被小偷偷窃, 就会引起报警系统
+//在不触发报警装置的情况下, 能够盗窃到的最大金额是什么?
+
+    //就是求间隔为1的一组数(都是正整数)的和的最大值
+    // dp的话通常是要写出 dp方程
+    int rob(vector<int>& nums) {
+        
+        int len = nums.size();
+        // 这里定义动态数组的大小是需要注意的, 否则是会越界出错的, 特殊情况单独分析
+        
+        if(len == 0) return 0;
+        if(len == 1) return nums[0];
+        
+        int dp[len];
+        // 设置一个关于dp的初始化, 这里存的是最后的最大值, 所以这里的初始化是很重要的
+        
+        dp[0] = nums[0], dp[1] = max(nums[0], nums[1]);
+        
+        for(int i = 2; i < len; i ++){
+            dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]);
+        }
+        return dp[len - 1];
+    }

@@ -1,0 +1,23 @@
+//最长回文串
+//给定一个只包含大小写字母的字符串, 找出通过这些字母构成的最长的回文串是什么?
+
+	int longestPalindrome(string s) {
+        
+        //s 包含大小写字母
+        //是回文串 --- 利用s的大小
+        if(s.length() == 0) return 0;
+        
+        vector<int> v(58, 0); //给定一个确定的值;// 26 + 26 || 122 - 65 = 57
+        for(int i = 0; i < s.length(); i ++){
+            v[s[i] - 'A'] ++;
+        }
+        int res = 0;
+     
+        for(int j = 0; j < v.size(); j ++){ //判断数组的长度
+       
+            res += (v[j] / 2) * 2; //好法子!!! 
+        }
+        
+        //判断有没有出现
+        return res < s.length() ? res + 1 : res; //+ 1表示只有一个元素的
+    }

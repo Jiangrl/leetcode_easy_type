@@ -1,0 +1,24 @@
+//丑数
+//一个数只包含质因数2、3、5的正整数.
+
+	//只包含2, 3, 5
+    bool isUgly(int num) {//num可能是有符号数
+        
+        while(num){
+            if(num == 1) return true;
+            
+            if(num % 2 == 0){
+                 num /= 2;
+            }
+            else if(num % 3 == 0){
+                num /= 3;
+            }
+            else if(num % 5 == 0){
+                num /= 5;
+            }else{
+                return false;
+            }
+        }
+        
+        return false;
+    }

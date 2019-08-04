@@ -1,0 +1,58 @@
+//回文链表
+//判断一个链表是否为回文链表
+
+	//可以压栈进行操作，空间复杂度比较高
+    bool isPalindrome(ListNode* head) {
+        
+        //注意是链式结构, 可以双指针结构
+        //快慢指针结构
+        //翻转后半段，或者直接翻转
+        ListNode* fast = head, *slow = head;
+   
+        while(fast != NULL){//找中心
+            //如果非空则移动两步
+            fast = fast->next ? fast->next->next : fast->next;
+            
+            slow = slow->next;
+        }
+        
+        //从中心节点开始逆置
+        slow = reverse(slow);
+        
+        //此时slow是从倒数第一个数开始的
+        ListNode*  p = head, *q = slow;
+        
+        while(p && q){
+            if(p->val != q->val){
+                return false;
+            }
+            p = p->next;
+            q = q->next;
+        }
+        
+        return true;
+    }
+    
+    //原地逆置
+    ListNode* reverse(ListNode* head){
+        if(head == NULL) return NULL;
+        
+        // 1->2->3->4->5
+        //这是带头节点的链表
+        ListNode *p = head;
+        
+        ListNode* s = p->next;//第一个有val值的节点
+        
+        ListNode* t;//中间节点temp
+        while(s){
+            t = s->next;//将s后续链存下来，这样防止链断裂
+            s->next = p; // s的后继指针指向p(即指向head)
+            p = s;
+            
+            s = t;
+        }
+        
+        head->next = NULL;
+        
+        return p;
+    }

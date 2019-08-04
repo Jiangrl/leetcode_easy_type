@@ -1,0 +1,11 @@
+//二叉树的最大深度
+//从根开始到最远叶子节点的最长路径的节点数
+
+	/*
+    在树的相关编程中，可以使用大量递归，是非常好用的方法
+    如果不适用递归的话，一般需要使用辅助数据结构，利用遍历中的一些思想进行处理
+    */
+    int maxDepth(TreeNode* root) {
+        
+        return root == NULL ? 0 : max(maxDepth(root->left), maxDepth(root->right)) + 1;
+    }
